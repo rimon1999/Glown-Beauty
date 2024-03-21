@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const usersRouter = require('./routes/clients');
+require('dotenv').config(); // Load environment variables from .env file
 
 
 app.use('/client', usersRouter);
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://n01514083:admin123@cluster0.fts4zer.mongodb.net/registration', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
