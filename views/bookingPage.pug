@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Booking Page
+    // Add your CSS styles here
+  body
+    .container
+      h1 Book Appointment
+      // Display laser service information
+      p Service: #{laser.laserName}
+      p Duration: #{laser.laserTime} Minutes
+      p Price: CA$ #{laser.laserPrice}
+      // Booking form
+      form(action=`/client/book/${laser._id}`, method="POST")
+        label(for="firstName") Name:
+        input(type="text", id="firstName", name="firstName", required)
+        br
+        label(for="lastName") Last Name:
+        input(type="text", id="lastName", name="lastName", required)
+        br
+        label(for="phoneNumber") Phone Number: 
+        input(type="number", id="phoneNumber", name="phoneNumber", required) 
+        br        
+        label(for="email") Email: 
+        input(type="email", id="email", name="email", required) 
+        br
+        label(for="appointmentDate") Please write what time and date you want in form of DD-MM-YYYY and I will contact you on your phone number to confirm if I can do at that date:
+        br
+        textarea(id="appointmentDate", name="appointmentDate", placeholder="Enter preferred date and time", rows="3", required)
+        br
+        button(type="submit") Book Appointment 
