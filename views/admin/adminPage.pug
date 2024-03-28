@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Admin Page
+    // Bootstrap CSS
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      body {
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        padding: 20px;
+      }
+  body
+    .container
+      h1.mb-4 Admin Page
+      table.table.table-striped.table-dark
+        thead
+          tr
+            th First Name
+            th Last Name
+            th Phone Number
+            th Email
+            th Appointment Date
+            th Laser Name
+            th Laser Price
+            th Laser Time
+            th Actions
+        tbody
+          each booking in bookings
+            tr
+              td= booking.firstName
+              td= booking.lastName
+              td= booking.phoneNumber
+              td= booking.email
+              td= booking.appointmentDate
+              td= booking.laserName
+              td= booking.laserPrice
+              td= booking.laserTime
+              td
+                a.btn.btn-primary(href=`/admin/edit/${booking._id}?key=${ADMIN_SECRET_KEY}`) Edit
+                form(action=`/admin/delete/${booking._id}?key=${ADMIN_SECRET_KEY}`, method='POST', style='display:inline;')
+                  button.btn.btn-danger(type='submit') Delete

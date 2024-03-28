@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Admin Page
+    // Bootstrap CSS
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
+    // Bootstrap JavaScript (optional, if you need to use Bootstrap's JS features)
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js")
+    style.
+      body {
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        padding: 20px;
+      }
+  body
+    .container
+      block content
+        h1.mb-4 Edit Booking
+        form(action=`/admin/edit/${booking._id}?key=${ADMIN_SECRET_KEY}`, method='POST')
+          //- First Name
+          .form-floating.mb-3
+            input.form-control(type='text', id='firstName', name='firstName', value=booking.firstName)
+            label(for='firstName') First Name
+          //- Last Name
+          .form-floating.mb-3
+            input.form-control(type='text', id='lastName', name='lastName', value=booking.lastName)
+            label(for='lastName') Last Name
+          //- Phone Number
+          .form-floating.mb-3
+            input.form-control(type='text', id='phoneNumber', name='phoneNumber', value=booking.phoneNumber)
+            label(for='phoneNumber') Phone Number
+          //- Email
+          .form-floating.mb-3
+            input.form-control(type='email', id='email', name='email', value=booking.email)
+            label(for='email') Email
+          //- Appointment Date
+          .form-floating.mb-3
+            input.form-control(type='textarea', id='appointmentDate', name='appointmentDate', value=booking.appointmentDate)
+            label(for='appointmentDate') Appointment Date
+          //- Laser Name
+          .form-floating.mb-3
+            input.form-control(type='text', id='laserName', name='laserName', value=booking.laserName)
+            label(for='laserName') Laser Name
+          //- Laser Price
+          .form-floating.mb-3
+            input.form-control(type='text', id='laserPrice', name='laserPrice', value=booking.laserPrice)
+            label(for='laserPrice') Laser Price
+          //- Laser Time
+          .form-floating.mb-3
+            input.form-control(type='text', id='laserTime', name='laserTime', value=booking.laserTime)
+            label(for='laserTime') Laser Time
+          //- Submit Button
+          button.btn.btn-primary(type='submit') Update Booking

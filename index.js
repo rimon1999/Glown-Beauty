@@ -4,7 +4,8 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
-const usersRouter = require('./routes/clients');
+const clientRouter = require('./routes/clients');
+const adminRouter = require('./routes/admin')
 require('dotenv').config(); // Load environment variables from .env file
 
 
@@ -18,7 +19,9 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views')); // Set the directory where your views will be stored
 
 
-app.use('/client', usersRouter);
+app.use('/client', clientRouter);
+app.use('/admin', adminRouter);
+
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,

@@ -1,7 +1,11 @@
 doctype html
-html
+html(lang="en")
   head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Laser Book Page
+    // Bootstrap CSS
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     style.
       body {
         background-color: #000;
@@ -11,56 +15,18 @@ html
         padding: 0;
       }
       .container {
-        width: 80%;
-        margin: 0 auto;
         padding: 20px;
-      }
-      .book-page {
-        background-color: #222;
-        border-radius: 10px;
-        padding: 20px;
-        position: relative;
-      }
-      .book-page::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle, transparent 20%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.6) 60%, rgba(255, 255, 255, 0.8) 80%, rgba(255, 255, 255, 0.9) 100%);
-        opacity: 0.5;
-        pointer-events: none;
-      }
-      h1,h2 {
-        text-align: center;
-      }
-      p {
-        text-align: justify;
-      }
-      .book-button {
-        display: inline-block;
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 8px;
-        padding: 10px 20px;
       }
   body
     .container
-      .book-page
-        h1 Laser Book Page
-        h2 WELCOME TO OUR BOOKING SITE
-        h3 Services
-        ul
-          each laser in lasers 
-            li
-                p= laser.laserName + " " + laser.laserTime +" Minutes" +" @ CA$" + laser.laserPrice
-                    a.book-button(href=`/client/book/${laser._id}`) Book 
-              
-
+      .row.justify-content-center
+        .col-md-8
+          .book-page
+            h1.mb-4 Laser Book Page
+            h2 WELCOME TO OUR BOOKING SITE
+            h3.mt-4 Services
+            ul.list-group
+              each laser in lasers 
+                li.list-group-item
+                  p.mb-0(style="color: black")= `${laser.laserName} - ${laser.laserTime} Minutes @ CA$${laser.laserPrice}`
+                  a.btn.btn-success.book-button(href=`/client/book/${laser._id}`) Book
