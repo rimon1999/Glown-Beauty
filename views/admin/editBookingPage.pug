@@ -1,6 +1,8 @@
 doctype html
 html(lang="en")
   head
+  include ../partials/_navbar.pug
+
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Admin Page
@@ -20,6 +22,7 @@ html(lang="en")
         padding: 20px;
       }
   body
+
     .container
       block content
         h1.mb-4 Edit Booking
@@ -50,11 +53,11 @@ html(lang="en")
             label(for='laserName') Laser Name
           //- Laser Price
           .form-floating.mb-3
-            input.form-control(type='text', id='laserPrice', name='laserPrice', value=booking.laserPrice)
+            input.form-control(type='number', id='laserPrice', name='laserPrice', value=booking.laserPrice)
             label(for='laserPrice') Laser Price
           //- Laser Time
           .form-floating.mb-3
-            input.form-control(type='text', id='laserTime', name='laserTime', value=booking.laserTime)
+            input.form-control(type='number', id='laserTime', name='laserTime', value=booking.laserTime)
             label(for='laserTime') Laser Time
           //- Submit Button
           button.btn.btn-primary(type='submit') Update Booking

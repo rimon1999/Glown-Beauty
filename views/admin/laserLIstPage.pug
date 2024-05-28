@@ -22,30 +22,22 @@ html(lang="en")
 
     .container
       h1.mb-4 Admin Page
+      a.btn.btn-primary(href=`/admin/laser/add/?key=${ADMIN_SECRET_KEY}`) Add Laser
+
       table.table.table-striped.table-dark
         thead
           tr
-            th First Name
-            th Last Name
-            th Phone Number
-            th Email
-            th Appointment Date
             th Laser Name
             th Laser Price
             th Laser Time
             th Actions
         tbody
-          each booking in bookings
+          each laser in lasers
             tr
-              td= booking.firstName
-              td= booking.lastName
-              td= booking.phoneNumber
-              td= booking.email
-              td= booking.appointmentDate
-              td= booking.laserName
-              td= booking.laserPrice
-              td= booking.laserTime
+              td= laser.laserName
+              td= laser.laserPrice
+              td= laser.laserTime
               td
-                a.btn.btn-primary(href=`/admin/edit/${booking._id}?key=${ADMIN_SECRET_KEY}`) Edit
-                form(action=`/admin/delete/${booking._id}?key=${ADMIN_SECRET_KEY}`, method='POST', style='display:inline;')
+                a.btn.btn-primary(href=`/admin/edit-laser/edit/${laser._id}?key=${ADMIN_SECRET_KEY}`) Edit
+                form(action=`/admin/edit-laser/delete/${laser._id}?key=${ADMIN_SECRET_KEY}`, method='POST', style='display:inline;')
                   button.btn.btn-danger(type='submit') Delete

@@ -17,6 +17,9 @@ html(lang="en")
       .container {
         padding: 20px;
       }
+      .card-text{
+        color: black; 
+      }
   body
     .container
       h1.mb-4 Book Appointment
@@ -24,9 +27,9 @@ html(lang="en")
         .col-md-6
           .card
             .card-body
-              p.card-text Service: Laser Name
-              p.card-text Duration: Laser Time Minutes
-              p.card-text Price: CA$ Laser Price
+              p.card-text Service: #{laser.laserName}
+              p.card-text Duration: #{laser.laserTime} Minutes
+              p.card-text Price: #{laser.laserPrice} CAD
               // Booking form
               form(action=`/client/book/${laser._id}`, method="POST" style="color: black")
                 .form-group

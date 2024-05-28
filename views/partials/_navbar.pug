@@ -1,0 +1,11 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container-fluid
+    a.navbar-brand(href='#') Admin
+    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarNav
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link(href=`/admin/laser?key=${ADMIN_SECRET_KEY}`) Laser List
+        li.nav-item
+          a.nav-link(href=`/admin/?key=${ADMIN_SECRET_KEY}`) Edit Bookings
