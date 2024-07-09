@@ -106,4 +106,9 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
     }
 });
 
+router.get('/success',  async (req, res, next) => {
+return res.render('success')
+
+});
+
 module.exports = router;
