@@ -86,7 +86,7 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
 
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
-            to: process.env.EMAIL_USERNAME,
+            to: process.env.EMAIL_TO,
             subject: 'New Booking',
             text: `A new booking has been made with the following details:\n\nName: ${req.body.firstName} ${req.body.lastName}\nPhone Number: ${req.body.phoneNumber}\nEmail: ${req.body.email}\nAppointment Date: ${req.body.appointmentDate}\n\nService Details:\nService: ${laser.laserName}\nDuration: ${laser.laserTime} Minutes\nPrice: CA$ ${laser.laserPrice}\n`
         };
