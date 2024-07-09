@@ -3,7 +3,8 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const Laser = require('../models/laser');
 const Client = require("../models/client");
-const nodemailer = require('nodemailer'); // Import nodemailer
+const nodemailer = require('nodemailer');
+require('dotenv').config(); // Ensure environment variables are loaded
 
 // Define validation rules for booking form data
 const validateBookingForm = [
@@ -25,7 +26,6 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-
 router.get('/book/:id', async (req, res, next) => {
     try {
         const laser = await Laser.findById(req.params.id);
@@ -40,15 +40,13 @@ router.get('/book/:id', async (req, res, next) => {
     }
 });
 
-
-
 // POST route to process booking form data
 router.post('/book/:id', validateBookingForm, async (req, res, next) => {
     try {
         // Check for validation errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).render('bookingPage', { 
+            return res.status(400).render('bookingPage', {
                 errors: errors.array(),
                 laser: await Laser.findById(req.params.id)
             });
@@ -80,23 +78,45 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
             auth: {
                 user: process.env.EMAIL_USERNAME,
                 pass: process.env.EMAIL_PASSWORD
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         });
 
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
-            to: process.env.EMAIL_USERNAME, 
+            to: process.env.EMAIL_USERNAME,
             subject: 'New Booking',
             text: `A new booking has been made with the following details:\n\nName: ${req.body.firstName} ${req.body.lastName}\nPhone Number: ${req.body.phoneNumber}\nEmail: ${req.body.email}\nAppointment Date: ${req.body.appointmentDate}\n\nService Details:\nService: ${laser.laserName}\nDuration: ${laser.laserTime} Minutes\nPrice: CA$ ${laser.laserPrice}\n`
         };
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.error(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
+        const sendMailWithRetry = (mailOptions, retries = 3) => {
+            return new Promise((resolve, reject) => {
+                const attemptToSend = (attempt) => {
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            if (attempt <= retries) {
+                                console.error(`Attempt ${attempt} failed: ${error.message}. Retrying...`);
+                                setTimeout(() => attemptToSend(attempt + 1), 2000);
+                            } else {
+                                reject(error);
+                            }
+                        } else {
+                            resolve(info);
+                        }
+                    });
+                };
+                attemptToSend(1);
+            });
+        };
+
+        try {
+            const info = await sendMailWithRetry(mailOptions);
+            console.log('Email sent: ' + info.response);
+        } catch (error) {
+            console.error('Failed to send email after retries: ', error);
+        }
 
         // Redirect to a success page after booking
         return res.redirect('/client/success');
@@ -106,9 +126,8 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
     }
 });
 
-router.get('/success',  async (req, res, next) => {
-return res.render('success')
-
+router.get('/success', (req, res) => {
+    return res.render('success');
 });
 
 module.exports = router;
