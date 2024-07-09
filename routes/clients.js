@@ -99,7 +99,7 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
         });
 
         // Redirect to a success page after booking
-        return res.redirect('/success');
+        return res.redirect('/client/success');
     } catch (error) {
         console.error(error);
         return res.render('error', { error });
