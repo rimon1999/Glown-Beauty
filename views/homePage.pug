@@ -4,29 +4,113 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Laser Book Page
-    // Bootstrap CSS
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&family=Nunito:wght@400;600;700&display=swap", rel="stylesheet")
+    
     style.
+      :root {
+        --primary-pink: #ffc0cb;
+        --primary-pink-hover: #ffb6c1;
+      }
+      
       body {
-        background-color: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
+        background-color: #f8f9fa;
+        font-family: 'Quicksand', sans-serif;
       }
-      .container {
-        padding: 20px;
+      
+      .page-title {
+        font-family: 'Pacifico', cursive;
+        color: var(--primary-pink);
+        font-size: 3.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
       }
-  body
-    .container
+      
+      .welcome-text {
+        font-family: 'Nunito', sans-serif;
+        color: #495057;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+      
+      .services-title {
+        font-family: 'Nunito', sans-serif;
+        color: #495057;
+        font-weight: 700;
+      }
+      
+      .card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+      
+      .card-text {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+      
+      .book-button {
+        background-color: var(--primary-pink);
+        border-color: var(--primary-pink);
+        border-radius: 25px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+        min-width: 100px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+      }
+      
+      .book-button:hover {
+        background-color: var(--primary-pink-hover);
+        border-color: var(--primary-pink-hover);
+        transform: scale(1.05);
+      }
+      
+      .price-text {
+        color: #ff8fab;
+        font-weight: 700;
+      }
+      
+      @media (max-width: 768px) {
+        .page-title {
+          font-size: 2.5rem;
+        }
+        .card-text {
+          font-size: 1rem;
+        }
+      }
+
+  body.bg-light
+    .container.py-5
       .row.justify-content-center
-        .col-md-8
-          .book-page
-            h1.mb-4 Laser Book Page
-            h2 WELCOME TO OUR BOOKING SITE
-            h3.mt-4 Services
-            ul.list-group
-              each laser in lasers 
-                li.list-group-item
-                  p.mb-0(style="color: black")= `${laser.laserName} - ${laser.laserTime} Minutes @ CA$${laser.laserPrice}`
-                  a.btn.btn-success.book-button(href=`/client/book/${laser._id}`) Book
+        .col-lg-8
+          .text-center.mb-5
+            include ./partials/_progressNavbar.pug
+
+            h1.page-title.mb-3 Glow’N Beauty
+            
+            
+            h2.welcome-text.h4.mb-4 WELCOME TO OUR BOOKING SITE
+            h3.services-title.h5.mb-4 Services
+          
+          .services-list
+            each laser in lasers
+              .card.mb-3.shadow-sm
+                .card-body.py-4
+                  .d-flex.justify-content-between.align-items-center
+                    p.card-text.mb-0
+                      | #{laser.laserName} - #{laser.laserTime} Minutes -
+                      span.price-text   $#{laser.laserPrice}
+                    a.btn.book-button.text-white(href=`/client/book/${laser._id}`) Book
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2a/js/bootstrap.min.js")

@@ -6,51 +6,148 @@ html(lang="en")
     title Booking Page
     // Bootstrap CSS
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&family=Nunito:wght@400;600;700&display=swap", rel="stylesheet")
+    
     style.
+      :root {
+        --primary-pink: #ffc0cb;
+        --primary-pink-hover: #ffb6c1;
+      }
+      
       body {
-        background-color: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
+        background-color: #f8f9fa;
+        font-family: 'Quicksand', sans-serif;
       }
-      .container {
-        padding: 20px;
+      
+      .page-title {
+        font-family: 'Pacifico', cursive;          /* Cursive font style */
+        color: var(--primary-pink);                /* Soft pink color */
+        font-size: 3.5rem;                          /* Large font size */
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);  /* Subtle shadow effect */
       }
-      .card-text{
-        color: black; 
+
+      .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       }
-  body
-    .container
-      h1.mb-4 Book Appointment
+      
+      .service-details {
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .service-details p {
+        margin-bottom: 0.5rem;
+        color: #495057;
+      }
+      
+      .form-control:focus {
+        border-color: var(--primary-pink);
+        box-shadow: 0 0 0 0.2rem rgba(255, 192, 203, 0.25);
+      }
+      
+      .btn-book {
+        background-color: var(--primary-pink);
+        border-color: var(--primary-pink);
+        color: white;
+        padding: 0.5rem 2rem;
+        font-weight: 500;
+      }
+      
+      .btn-book:hover {
+        background-color: var(--primary-pink-hover);
+        border-color: var(--primary-pink-hover);
+        color: white;
+      }
+      
+      .form-group label {
+        color: #495057;
+        font-weight: 500;
+      }
+      
+      .alert-danger {
+        border-left: 4px solid #dc3545;
+      }
+      
+      .alert-danger ul {
+        margin-bottom: 0;
+        padding-left: 1.25rem;
+      }
+
+  body.bg-light
+    .container.py-5
       .row.justify-content-center
-        .col-md-6
+        .col-lg-8
+          include ./partials/_progressNavbar.pug
+          h1.page-title.text-center.display-4.mb-5 Glow’N Beauty  // Updated title
           .card
-            .card-body
-              p.card-text Service: #{laser.laserName}
-              p.card-text Duration: #{laser.laserTime} Minutes
-              p.card-text Price: #{laser.laserPrice} CAD
-              // Booking form
-              form(action=`/client/book/${laser._id}`, method="POST" style="color: black")
+            .card-body.p-4
+              .service-details
+                h4.mb-3.text-center Selected Service Details
+                .row
+                  .col-md-4
+                    p.font-weight-bold Service
+                    p= laser.laserName
+                  .col-md-4
+                    p.font-weight-bold Duration
+                    p #{laser.laserTime} Minutes
+                  .col-md-4
+                    p.font-weight-bold Price
+                    p CA$#{laser.laserPrice}
+
+              form(action=`/client/book/${laser._id}`, method="POST")
+                p.font-weight-bold.text-center.mb-3 Add Additional Services to Your Appointment
                 .form-group
-                  label(for="firstName" ) Name:
-                  input#firstName.form-control(type="text", name="firstName")
+                  .card
+                    .card-body
+                      .row
+                        each l in lasers
+                          if String(l._id) !== String(laser._id)
+                            .col-md-6
+                              .custom-control.custom-checkbox.mb-3
+                                input.custom-control-input(type="checkbox", id=`checkbox${l._id}`, name="additionalServices", value=l._id)
+                                label.custom-control-label(for=`checkbox${String(l._id)}`)
+                                  | #{l.laserName} - #{l.laserTime} Minutes @ CA$#{l.laserPrice}
+                .row
+                  .col-md-6
+                    .form-group
+                      label(for="firstName") First Name
+                      input#firstName.form-control(type="text", name="firstName", placeholder="Enter your first name")
+                  .col-md-6
+                    .form-group
+                      label(for="lastName") Last Name
+                      input#lastName.form-control(type="text", name="lastName", placeholder="Enter your last name")
+                
                 .form-group
-                  label(for="lastName") Last Name:
-                  input#lastName.form-control(type="text", name="lastName")
+                  label(for="phoneNumber") Phone Number
+                  input#phoneNumber.form-control(type="tel", name="phoneNumber", placeholder="Enter your phone number")
+                
                 .form-group
-                  label(for="phoneNumber") Phone Number:
-                  input#phoneNumber.form-control(type="text", name="phoneNumber")
+                  label(for="email") Email Address
+                  input#email.form-control(type="email", name="email", placeholder="Enter your email address")
+                
                 .form-group
-                  label(for="email") Email:
-                  input#email.form-control(type="email", name="email")
-                .form-group
-                  label(for="appointmentDate") Preferred Date and Time:
-                  textarea#appointmentDate.form-control(name="appointmentDate", placeholder="Enter preferred date and time", rows="3")
-                button.btn.btn-primary(type="submit") Book Appointment
-              // Display validation errors if any
+                  label(for="appointmentDate") Preferred Date and Time
+                  textarea#appointmentDate.form-control(
+                    name="appointmentDate", 
+                    rows="3",
+                    placeholder="Please specify your preferred date and time for the appointment"
+                  )
+                
+                .text-center.mt-4
+                  button.btn.btn-book.btn-lg(type="submit") Book Appointment
+              
               if errors
                 .alert.alert-danger.mt-4(role="alert")
                   ul
                     each error in errors
                       li= error.msg
+
+    // Bootstrap JS and dependencies
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

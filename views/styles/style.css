@@ -38,3 +38,8 @@ footer {
   text-align: center;
   padding: 20px 0;
 }
+
+.nav-link.active {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}

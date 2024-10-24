@@ -1,0 +1,73 @@
+nav.navbar.navbar-expand.navbar-light.bg-white.shadow-sm.mb-4
+  .container
+    a.navbar-brand(href="/client")
+      span(style="font-family: 'Pacifico', cursive; color: #ffc0cb;") Glow'N Beauty
+    
+    .navbar-nav.ml-auto
+      a.nav-link.px-4(
+        href="/client" 
+        class=`${currentPath === '/' ? 'active font-weight-bold' : ''}`
+        style=`${currentPath === '/' ? 'color: #ffc0cb !important;' : ''}`
+      ) Home
+      a.nav-link.px-4(
+        href="/book"
+        class=`${typeof currentPath === 'string' && currentPath.startsWith('/book/') ? 'active font-weight-bold' : ''}`
+        style=`${typeof currentPath === 'string' && currentPath.startsWith('/book/') ? 'color: #ffc0cb !important;' : ''}`
+      ) Book
+
+      a.nav-link.px-4(
+        class=`${currentPath === '/success' ? 'active font-weight-bold' : ''}`
+        style=`${currentPath === '/success' ? 'color: #ffc0cb !important;' : ''}`
+      ) Confirm
+
+style.
+  .navbar {
+    font-family: 'Quicksand', sans-serif;
+    padding: 1rem 0;
+  }
+  
+  .navbar-brand {
+    font-size: 1.8rem;
+    padding: 0;
+  }
+  
+  .nav-link {
+    color: #495057 !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    text-align: center;
+  }
+  
+  .nav-link:hover {
+    color: #ffc0cb !important;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #ffc0cb;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 80%;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.5rem 1rem !important;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+    }
+  }

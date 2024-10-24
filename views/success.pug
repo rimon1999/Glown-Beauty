@@ -1,0 +1,64 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Booking Successful
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&family=Nunito:wght@400;600;700&display=swap", rel="stylesheet")
+    
+    style.
+      :root {
+        --primary-pink: #ffc0cb;
+        --primary-pink-hover: #ffb6c1;
+      }
+      
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Quicksand', sans-serif;
+      }
+      
+      .page-title {
+        font-family: 'Pacifico', cursive;
+        color: var(--primary-pink);
+        font-size: 3.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .success-message {
+        font-family: 'Nunito', sans-serif;
+        color: #495057;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 1.5rem;
+      }
+      
+      .back-button {
+        background-color: var(--primary-pink);
+        border-color: var(--primary-pink);
+        border-radius: 25px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+      }
+      
+      .back-button:hover {
+        background-color: var(--primary-pink-hover);
+        border-color: var(--primary-pink-hover);
+        transform: scale(1.05);
+      }
+
+  body.bg-light
+    .container.py-5
+      .text-center
+        include ./partials/_progressNavbar.pug
+        h1.page-title Booking Successful
+        p.success-message Your appointment has been successfully booked.
+        a.btn.back-button.text-white(href="/") Back to Home
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
