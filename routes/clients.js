@@ -113,11 +113,7 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
         // Email options
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
-<<<<<<< HEAD
             to: process.env.EMAIL_USERNAME,
-=======
-            to: process.env.EMAIL_TO,
->>>>>>> 2d47bad56e918e5b4191f0913ab90863c352331d
             subject: 'New Booking',
             text: `A new booking has been made with the following details:\n\n` +
                   `Name: ${req.body.firstName} ${req.body.lastName}\n` +
@@ -150,10 +146,7 @@ router.post('/book/:id', validateBookingForm, async (req, res, next) => {
             });
         };
 
-<<<<<<< HEAD
         // Try to send the email
-=======
->>>>>>> 2d47bad56e918e5b4191f0913ab90863c352331d
         try {
             const info = await sendMailWithRetry(mailOptions);
             console.log('Email sent: ' + info.response);
