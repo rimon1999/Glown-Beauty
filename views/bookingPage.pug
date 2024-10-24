@@ -126,32 +126,33 @@ html(lang="en")
                             .col-md-6.col-12.mb-3  
                               .custom-control.custom-checkbox.mb-3
                                 input.custom-control-input(type="checkbox", id=`checkbox${l._id}`, name="additionalServices", value=l._id)
-                                label.custom-control-label(for=`checkbox${String(l._id)}`)
+                                label.custom-control-label(for=`checkbox${String(l._id)}`) 
                                   | #{l.laserName} - #{l.laserTime} Minutes @ CA$#{l.laserPrice}
                 .row
                   .col-md-6.col-12.mb-3
                     .form-group
                       label(for="firstName") First Name
-                      input#firstName.form-control(type="text", name="firstName", placeholder="Enter your first name")
+                      input#firstName.form-control(type="text", name="firstName", placeholder="Enter your first name", required)
                   .col-md-6.col-12.mb-3
                     .form-group
                       label(for="lastName") Last Name
-                      input#lastName.form-control(type="text", name="lastName", placeholder="Enter your last name")
+                      input#lastName.form-control(type="text", name="lastName", placeholder="Enter your last name", required)
                 
                 .form-group
                   label(for="phoneNumber") Phone Number
-                  input#phoneNumber.form-control(type="tel", name="phoneNumber", placeholder="Enter your phone number")
+                  input#phoneNumber.form-control(type="tel", name="phoneNumber", placeholder="Enter your phone number", required)
                 
                 .form-group
                   label(for="email") Email Address
-                  input#email.form-control(type="email", name="email", placeholder="Enter your email address")
+                  input#email.form-control(type="email", name="email", placeholder="Enter your email address", required)
                 
                 .form-group
                   label(for="appointmentDate") Preferred Date and Time
                   textarea#appointmentDate.form-control(
                     name="appointmentDate", 
                     rows="3",
-                    placeholder="Please specify your preferred date and time for the appointment"
+                    placeholder="Please specify your preferred date and time for the appointment", 
+                    required
                   )
                 
                 .text-center.mt-4

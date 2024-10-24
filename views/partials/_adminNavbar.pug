@@ -9,3 +9,19 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           a.nav-link(href=`/admin/laser?key=${ADMIN_SECRET_KEY}`) Laser List
         li.nav-item
           a.nav-link(href=`/admin/?key=${ADMIN_SECRET_KEY}`) Edit Bookings
+
+    // Additional styling for better mobile responsiveness
+    style.
+      .navbar-nav .nav-link {
+        font-size: 1rem; // Set a base font size
+      }
+
+      @media (max-width: 768px) {
+        .navbar-brand {
+          font-size: 1.5rem; // Increase brand font size on mobile
+        }
+        
+        .navbar-nav .nav-link {
+          font-size: 0.9rem; // Adjust nav link font size for mobile
+        }
+      }
