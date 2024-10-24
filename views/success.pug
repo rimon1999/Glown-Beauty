@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 doctype html
 html(lang="en")
   head
@@ -52,6 +51,21 @@ html(lang="en")
         transform: scale(1.05);
       }
 
+      @media (max-width: 768px) {
+        .page-title {
+          font-size: 2.5rem;  // Adjusted font size for mobile
+        }
+        
+        .success-message {
+          font-size: 1.25rem;  // Adjusted font size for mobile
+        }
+        
+        .back-button {
+          width: 100%;  // Full-width button on mobile
+          padding: 12px;  // Increased padding for better touch targets
+        }
+      }
+
   body.bg-light
     .container.py-5
       .text-center
@@ -63,29 +77,3 @@ html(lang="en")
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
     script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
-=======
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Booking Successful
-    // Bootstrap CSS
-    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
-    style.
-      body {
-        background-color: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        padding: 20px;
-      }
-  body
-    .container
-      h1.mb-4 Booking Successful
-      p Your appointment has been successfully booked.
-      a.btn.btn-primary(href="/") Back to Home
->>>>>>> 2d47bad56e918e5b4191f0913ab90863c352331d

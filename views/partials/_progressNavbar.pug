@@ -10,7 +10,6 @@ nav.navbar.navbar-expand.navbar-light.bg-white.shadow-sm.mb-4
         style=`${currentPath === '/' ? 'color: #ffc0cb !important;' : ''}`
       ) Home
       a.nav-link.px-4(
-        href="/book"
         class=`${typeof currentPath === 'string' && currentPath.startsWith('/book/') ? 'active font-weight-bold' : ''}`
         style=`${typeof currentPath === 'string' && currentPath.startsWith('/book/') ? 'color: #ffc0cb !important;' : ''}`
       ) Book

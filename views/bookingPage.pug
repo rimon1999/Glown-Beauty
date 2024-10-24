@@ -22,10 +22,10 @@ html(lang="en")
       }
       
       .page-title {
-        font-family: 'Pacifico', cursive;          /* Cursive font style */
-        color: var(--primary-pink);                /* Soft pink color */
-        font-size: 3.5rem;                          /* Large font size */
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);  /* Subtle shadow effect */
+        font-family: 'Pacifico', cursive;
+        color: var(--primary-pink);
+        font-size: 3.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
       }
 
       .card {
@@ -78,24 +78,40 @@ html(lang="en")
         padding-left: 1.25rem;
       }
 
+      @media (max-width: 768px) {
+        .page-title {
+          font-size: 2.5rem;
+        }
+        .btn-book {
+          width: 100%;  /* Full-width button on smaller screens */
+        }
+        .form-group input, 
+        .form-group textarea {
+          width: 100%;  /* Ensure inputs are full width on mobile */
+        }
+        .service-details {
+          margin-bottom: 1rem;
+        }
+      }
+
   body.bg-light
-    .container.py-5
+    .container-fluid.py-5
       .row.justify-content-center
-        .col-lg-8
+        .col-lg-8.col-md-10.col-12  
           include ./partials/_progressNavbar.pug
-          h1.page-title.text-center.display-4.mb-5 Glow’N Beauty  // Updated title
+          h1.page-title.text-center.display-4.mb-5 Glow’N Beauty
           .card
             .card-body.p-4
               .service-details
                 h4.mb-3.text-center Selected Service Details
                 .row
-                  .col-md-4
+                  .col-md-4.col-12.mb-2  
                     p.font-weight-bold Service
                     p= laser.laserName
-                  .col-md-4
+                  .col-md-4.col-12.mb-2
                     p.font-weight-bold Duration
                     p #{laser.laserTime} Minutes
-                  .col-md-4
+                  .col-md-4.col-12.mb-2
                     p.font-weight-bold Price
                     p CA$#{laser.laserPrice}
 
@@ -107,17 +123,17 @@ html(lang="en")
                       .row
                         each l in lasers
                           if String(l._id) !== String(laser._id)
-                            .col-md-6
+                            .col-md-6.col-12.mb-3  
                               .custom-control.custom-checkbox.mb-3
                                 input.custom-control-input(type="checkbox", id=`checkbox${l._id}`, name="additionalServices", value=l._id)
                                 label.custom-control-label(for=`checkbox${String(l._id)}`)
                                   | #{l.laserName} - #{l.laserTime} Minutes @ CA$#{l.laserPrice}
                 .row
-                  .col-md-6
+                  .col-md-6.col-12.mb-3
                     .form-group
                       label(for="firstName") First Name
                       input#firstName.form-control(type="text", name="firstName", placeholder="Enter your first name")
-                  .col-md-6
+                  .col-md-6.col-12.mb-3
                     .form-group
                       label(for="lastName") Last Name
                       input#lastName.form-control(type="text", name="lastName", placeholder="Enter your last name")

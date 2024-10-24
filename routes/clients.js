@@ -31,7 +31,6 @@ router.get('/', async (req, res, next) => {
 router.get('/book/:id', async (req, res, next) => {
     try {
         const currentPath = req.path;
-console.log(currentPath);
         const lasers = await Laser.find();
         const laser = await Laser.findById(req.params.id);
         if (!laser) {
